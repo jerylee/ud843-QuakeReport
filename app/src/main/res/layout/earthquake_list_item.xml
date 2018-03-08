@@ -26,4 +26,11 @@
         android:layout_weight="1"
         tools:text="Mar 6, 2010" />
 
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.69"
+        android:text="@string/go_to"
+        tools:text=">>"/>
+
 </LinearLayout>
