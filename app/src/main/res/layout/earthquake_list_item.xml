@@ -10,27 +10,63 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
-        tools:text="8.9" />
+        tools:text="8.9"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/location"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        tools:text="San Francisco, CA" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/date"
+        <TextView
+            android:id="@+id/location_offset"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:text="30km S of" />
+
+        <TextView
+            android:id="@+id/primary_location"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="San Francisco, CA" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        tools:text="Mar 6, 2010" />
+        android:orientation="vertical">
 
-    <Button
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.69"
-        android:text="@string/go_to"
-        tools:text=">>"/>
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Mar 6, 2010" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="03:00 PM" />
+
+
+    </LinearLayout>
+
+
+    <!--<Button-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="0.69"-->
+    <!--android:text="@string/go_to"-->
+    <!--tools:text=">>"/>-->
 
 </LinearLayout>
