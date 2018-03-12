@@ -71,7 +71,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
 
 
-        /*=============set time from Milliseconds becone simple time format=============*/
+        /*=============set time from Milliseconds become simple time format=============*/
         Date dateObject = new Date(currentEarthquake.getTimeInMilliseconds());
 
         TextView dateView = (TextView) listItemView.findViewById(R.id.date);
@@ -81,7 +81,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         TextView timeView = (TextView) listItemView.findViewById(R.id.time);
         String formattedTime = formatTime(dateObject);
         timeView.setText(formattedTime);
-        /*=============set time from Milliseconds becone simple time format=============*/
+        /*=============set time from Milliseconds become simple time format=============*/
 
         return listItemView;
 
