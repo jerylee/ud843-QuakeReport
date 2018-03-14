@@ -1,9 +1,11 @@
 package com.example.android.quakereport;
 
 import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public final class QueryUtils {
@@ -51,7 +53,7 @@ public final class QueryUtils {
             JSONObject baseJsonResponse = new JSONObject(SAMPLE_JSON_RESPONSE);
             JSONArray earthquakeArray = baseJsonResponse.getJSONArray("features");
 
-            for(int i = 0; i < earthquakeArray.length(); i++) {
+            for (int i = 0; i < earthquakeArray.length(); i++) {
                 JSONObject currentEarthquake = earthquakeArray.getJSONObject(i);
                 JSONObject properties = currentEarthquake.getJSONObject("properties");
 
