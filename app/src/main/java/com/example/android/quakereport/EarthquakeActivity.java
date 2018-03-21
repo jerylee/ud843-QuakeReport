@@ -35,7 +35,7 @@ public class EarthquakeActivity extends AppCompatActivity {
     private static final String LOG_TAG = EarthquakeActivity.class.getName();
 
     /** URL for earthquake data from the USGS dataset */
-    private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=2&limit=30";
+    private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=2&limit=100";
 
     /** Adapter for the list of earthquakes */
     private EarthquakeAdapter mAdapter;
