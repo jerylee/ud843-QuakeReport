@@ -40,7 +40,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
 
 
     /** URL for earthquake data from the USGS dataset */
-    private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=2&limit=100";
+    private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=2&limit=50";
 
     private static final int EARTHQUAKE_LOADER_ID = 1;
 
