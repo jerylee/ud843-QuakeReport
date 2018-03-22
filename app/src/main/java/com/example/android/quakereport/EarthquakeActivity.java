@@ -17,8 +17,11 @@ package com.example.android.quakereport;
 
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +31,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -37,7 +41,7 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
 
     private static final String LOG_TAG = EarthquakeActivity.class.getName();
 
-
+    private TextView mEmptyStateTextView;
 
     /** URL for earthquake data from the USGS dataset */
     private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=2&limit=50";
@@ -82,6 +86,8 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
         // so the list can be populated in the user interface
         earthquakeListView.setAdapter(mAdapter);
 
+        mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
+        earthquakeListView.setEmptyView(mEmptyStateTextView);
 
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
@@ -115,14 +121,30 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
 //            // Start the AsyncTask to fetch the earthquake data
 //            EarthquakeAsyncTask task = new EarthquakeAsyncTask();
 //            task.execute(USGS_REQUEST_URL);
-            // Get a reference to the LoaderManager, in order to interact with loaders.
-            LoaderManager loaderManager = getLoaderManager();
+            ConnectivityManager conMgr = (ConnectivityManager)
+            getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            NetworkInfo networkInfo = conMgr.getActiveNetworkInfo();
+            if (networkInfo!=null && networkInfo.isConnected()){
+
+                // Get a reference to the LoaderManager, in order to interact with loaders.
+                LoaderManager loaderManager = getLoaderManager();
+                Log.i(LOG_TAG, "TEST: calling initLoader()...");
+
+                loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
+            } else {
+                View loadingIndicator = findViewById(R.id.loading_indicator);
+                loadingIndicator.setVisibility(View.GONE);
+
+                mEmptyStateTextView.setText(R.string.no_internet_connection);
+            }
+
+
 
             // Initialize the loader. Pass in the int ID constant defined above and pass in null for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
-            Log.i(LOG_TAG, "TEST: calling initLoader()...");
-            loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
+
 
         }
 
@@ -137,9 +159,14 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderCallb
     @Override
     public void onLoadFinished(Loader<List<Earthquake>> loader, List<Earthquake> earthquakes) {
         Log.i(LOG_TAG, "TEST : onLoadFinished() called...");
+
+        // Set empty state text to display "No earthquakes found."
+        mEmptyStateTextView.setText(R.string.no_earthquakes);
+
         mAdapter.clear();
+
         if (earthquakes != null && !earthquakes.isEmpty()){
-            mAdapter.addAll(earthquakes);
+          mAdapter.addAll(earthquakes);
         }
 
     }
